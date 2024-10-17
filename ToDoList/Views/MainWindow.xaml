@@ -1,0 +1,35 @@
+﻿<Window x:Class="ToDoList.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ToDoList"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="10">
+            <Button Content="Add Task" Command="{Binding AddTaskCommand}" Width="100" Margin="5"/>
+            <Button Content="Delete Task" Command="{Binding DeleteTaskCommand}" Width="100" Margin="5"/>
+        </StackPanel>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask}" CanUserAddRows="False"  AutoGenerateColumns="False" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
+                <DataGridComboBoxColumn Header="Priority" SelectedItemBinding="{Binding Priority}" 
+                                        ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Width="100"/>
+                <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat=\{0:yyyy-MM-dd\}}" Width="150"/>
+                <DataGridComboBoxColumn Header="Status" SelectedItemBinding="{Binding Status}" 
+                                        ItemsSource="{Binding Source={StaticResource TaskStatuses}}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Save Changes" Command="{Binding SaveChangesCommand}" Width="90" Margin="5"/>
+        </StackPanel>
+
+    </Grid>
+</Window>
