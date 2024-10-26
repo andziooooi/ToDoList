@@ -4,17 +4,15 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using ToDoList.Commands;
 using ToDoList.Model;
+using ToDoList.Services;
+using ToDoList.Views;
 
 namespace ToDoList.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private ObservableCollection<Model.Task> _tasks;
-        public ObservableCollection<Model.Task> Tasks
-        {
-            get => _tasks;
-            set { _tasks = value; OnPropertyChanged(); }
-        }
+        private DataService _dataService;
+        public static ObservableCollection<Model.Task> Tasks { get;set; }
 
         private Model.Task _selectedTask;
         public Model.Task SelectedTask
@@ -26,20 +24,14 @@ namespace ToDoList.ViewModels
         public ICommand AddTaskCommand { get; }
         public ICommand DeleteTaskCommand { get; }
         public ICommand SaveTasksCommand { get; }
-        public ICommand SaveChangesCommand { get; }
-
-        private TaskContext _context;
-
-        public MainViewModel()
+        public MainViewModel(DataService dataService)
         {
-            _context = new TaskContext();
-            _context.Database.EnsureCreated();
-            Tasks = new ObservableCollection<Model.Task>(_context.Tasks.ToList());
+            _dataService = dataService;
+            Tasks = _dataService.GetItems();
 
             AddTaskCommand = new RelayCommand(AddTask);
             DeleteTaskCommand = new RelayCommand(DeleteTask);
             SaveTasksCommand = new RelayCommand(SaveTasks);
-            SaveChangesCommand = new RelayCommand(SaveChanges);
         }
         private void AddTask(object parameter)
         {
@@ -51,29 +43,23 @@ namespace ToDoList.ViewModels
                 Deadline = DateTime.Now.AddDays(7),
                 Status = Model.TaskStatus.ToDo
             };
-            _context.Tasks.Add(newTask);
-            _context.SaveChanges();
-            Tasks.Add(newTask);
-            SelectedTask = newTask;
+            var addtaskw = new AddTaskW();
+            addtaskw.DataContext = new AddTaskWVM(newTask,_dataService, () => addtaskw.Close());
+            addtaskw.ShowDialog();
+            _dataService.SaveChanges();
         }
 
         private void DeleteTask(object parameter)
         {
             if (SelectedTask != null)
             {
-                _context.Tasks.Remove(SelectedTask);
-                _context.SaveChanges();
+                _dataService.RemoveItem(SelectedTask);
                 Tasks.Remove(SelectedTask);
             }
         }
-        private void SaveChanges(object obj)
-        {
-            _context.SaveChanges();
-        }
-
         private void SaveTasks(object parameter)
         {
-            _context.SaveChanges();
+            _dataService.SaveChanges();
         }
         public event PropertyChangedEventHandler? PropertyChanged;
 

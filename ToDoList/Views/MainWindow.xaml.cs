@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using ToDoList.Model;
+using ToDoList.Services;
 using ToDoList.ViewModels;
 
 namespace ToDoList
@@ -10,8 +12,10 @@ namespace ToDoList
     {
         public MainWindow()
         {
+            var dbContext = new TaskContext();
+            var dataService = new DataService(dbContext);
             InitializeComponent();
-            DataContext = new MainViewModel();
+            DataContext = new MainViewModel(dataService);
         }
     }
 }
