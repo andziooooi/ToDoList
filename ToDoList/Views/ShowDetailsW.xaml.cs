@@ -1,10 +1,9 @@
 ﻿using System.Windows;
-
 namespace ToDoList.Views
 {
-    public partial class AddTaskW : Window
+    public partial class ShowDetailsW : Window
     {
-        public AddTaskW()
+        public ShowDetailsW()
         {
             InitializeComponent();
         }

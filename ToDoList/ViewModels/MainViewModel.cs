@@ -24,15 +24,30 @@ namespace ToDoList.ViewModels
         public ICommand AddTaskCommand { get; }
         public ICommand DeleteTaskCommand { get; }
         public ICommand SaveTasksCommand { get; }
+        public RelayCommand ShowDetailsCommand { get; }
+
         public MainViewModel(DataService dataService)
         {
             _dataService = dataService;
             Tasks = _dataService.GetItems();
 
+
             AddTaskCommand = new RelayCommand(AddTask);
             DeleteTaskCommand = new RelayCommand(DeleteTask);
             SaveTasksCommand = new RelayCommand(SaveTasks);
+            ShowDetailsCommand = new RelayCommand(ShowDetails);
         }
+
+        private void ShowDetails(object obj)
+        {
+            if(obj is Model.Task task)
+            {
+                var showd = new ShowDetailsW();
+                showd.DataContext = new ShowDetailsWVM(task);
+                showd.ShowDialog();
+            }
+        }
+
         private void AddTask(object parameter)
         {
             var newTask = new Model.Task
