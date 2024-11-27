@@ -18,20 +18,22 @@
             <Button Content="Delete Task" Command="{Binding DeleteTaskCommand}" Width="100" Margin="5"/>
         </StackPanel>
         <DataGrid Grid.Row="1" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask}" CanUserAddRows="False"  AutoGenerateColumns="False" Margin="10">
+            <DataGrid.CellStyle>
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Padding" Value="5"/>
+                </Style>
+            </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Name" Width="*">
+                <DataGridTemplateColumn Header="Name" Width="*" SortMemberPath="Name">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}"
-                           TextTrimming="CharacterEllipsis"
-                           TextWrapping="NoWrap"/>
+                            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
-                <DataGridComboBoxColumn Header="Priority" SelectedItemBinding="{Binding Priority}" 
-                                        ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Width="100"/>
-                <DataGridTemplateColumn Header="Deadline">
+                <DataGridComboBoxColumn Header="Priority" SelectedItemBinding="{Binding Priority}" ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Width="100" />
+                <DataGridTemplateColumn Header="Deadline" SortMemberPath="Deadline">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}}" Width="150" TextAlignment="Center"/>
@@ -44,14 +46,14 @@
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
                 <!--<DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}}" Width="150"/> -->
-                <DataGridComboBoxColumn Header="Status" SelectedItemBinding="{Binding Status}" 
-                                        ItemsSource="{Binding Source={StaticResource TaskStatuses}}" Width="100"/>
-                <DataGridTemplateColumn Header="Szczegóły">
+                <DataGridComboBoxColumn Header="Status" SelectedItemBinding="{Binding Status}" ItemsSource="{Binding Source={StaticResource TaskStatuses}}" Width="100"/>
+                <DataGridTemplateColumn Header="Details">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Pokaż szczegóły" 
-                        Command="{Binding DataContext.ShowDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
-                        CommandParameter="{Binding}">
+                            <Button Content="Show details"
+                                    Margin="2"
+                                    Command="{Binding DataContext.ShowDetailsCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                    CommandParameter="{Binding}">
                             </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -61,7 +63,6 @@
         <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="Save Changes" Command="{Binding SaveTasksCommand}" Width="90" Margin="5"/>
         </StackPanel>
-        
 
     </Grid>
     

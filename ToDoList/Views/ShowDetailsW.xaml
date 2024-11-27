@@ -5,7 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoList"
         mc:Ignorable="d"
-        Title="ShowDetailsW" Height="450" Width="800">
+        Title="ShowDetailsW" Height="450" Width="450">
+    <Window.Resources>
+        <Style x:Key="CustomTextBlockTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+        </Style>
+        <Style x:Key="CustomTextBlockContent" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25*"/>
@@ -17,21 +30,38 @@
             <RowDefinition Height="25*"/>
             <RowDefinition Height="25*"/>
             <RowDefinition Height="25*"/>
-            <RowDefinition Height="184*"/>
+            <RowDefinition Height="70*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="41*"/>
-            <ColumnDefinition Width="9*"/>
+            <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Text="Task Name" TextAlignment="Center" Margin="5"/>
-        <TextBlock Text="{Binding Name}" Grid.Row="1"/>
-        <TextBlock Grid.Row="2" Text="Status" TextAlignment="Center" Margin="5"/>
-        <TextBlock Grid.Row="3" Text="{Binding Status}"/>
-        <TextBlock Grid.Row="4" Text="Priority" TextAlignment="Center" Margin="5"/>
-        <TextBlock Grid.Row="5" Text="{Binding Priority}"/>
-        <TextBlock Grid.Row="6" Text="Deadline" TextAlignment="Center" Margin="5"/>
-        <TextBlock Grid.Row="7" Text="{Binding DeadLine,StringFormat=\{0:dd-MM-yyyy\}}"/>
-        <TextBlock Grid.Row="8" Text="Description" TextAlignment="Center" Margin="5"/>
-        <TextBlock Grid.Row="9" Text="{Binding Description}"/>
+        <Border Grid.Row="0" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+            <TextBlock Text="Task Name" Style="{StaticResource CustomTextBlockTitle}"/>
+        </Border>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,2">
+            <TextBlock Text="{Binding Name}" Grid.Row="1" Style="{StaticResource CustomTextBlockContent}"/>
+        </Border>
+        <Border Grid.Row="2" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+            <TextBlock Grid.Row="2" Text="Status" Style="{StaticResource CustomTextBlockTitle}"/>
+        </Border>
+        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,0,0,2">
+            <TextBlock Grid.Row="3" Text="{Binding Status}" Style="{StaticResource CustomTextBlockContent}"/>
+        </Border>
+        <Border Grid.Row="4" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+            <TextBlock Grid.Row="4" Text="Priority" Style="{StaticResource CustomTextBlockTitle}"/>
+        </Border>
+        <Border Grid.Row="5" BorderBrush="Black" BorderThickness="0,0,0,2">
+            <TextBlock Grid.Row="5" Text="{Binding Priority}" Style="{StaticResource CustomTextBlockContent}"/>
+        </Border>
+        <Border Grid.Row="6" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+            <TextBlock Grid.Row="6" Text="Deadline" Style="{StaticResource CustomTextBlockTitle}"/>
+        </Border>
+        <Border Grid.Row="7" BorderBrush="Black" BorderThickness="0,0,0,2">
+            <TextBlock Grid.Row="7" Text="{Binding DeadLine,StringFormat=\{0:dd-MM-yyyy\}}" Style="{StaticResource CustomTextBlockContent}"/>
+        </Border>
+        <Border Grid.Row="8" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+            <TextBlock Grid.Row="8" Text="Description" Style="{StaticResource CustomTextBlockTitle}"/>
+        </Border>
+        <TextBlock Grid.Row="9" Text="{Binding Description}" Style="{StaticResource CustomTextBlockContent}"/>
     </Grid>
 </Window>

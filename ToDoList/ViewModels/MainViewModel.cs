@@ -45,7 +45,7 @@ namespace ToDoList.ViewModels
             {
                 var showd = new ShowDetailsW();
                 showd.DataContext = new ShowDetailsWVM(task);
-                showd.ShowDialog();
+                showd.Show();
             }
         }
 
