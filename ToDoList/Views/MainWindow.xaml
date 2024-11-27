@@ -31,7 +31,7 @@
                 <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
                 <DataGridComboBoxColumn Header="Priority" SelectedItemBinding="{Binding Priority}" 
                                         ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Width="100"/>
-                <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat=\{0:yyyy-MM-dd\}}" Width="150"/>
+                <DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}}" Width="150"/>
                 <DataGridComboBoxColumn Header="Status" SelectedItemBinding="{Binding Status}" 
                                         ItemsSource="{Binding Source={StaticResource TaskStatuses}}" Width="100"/>
                 <DataGridTemplateColumn Header="Szczegóły">

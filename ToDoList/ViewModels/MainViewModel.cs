@@ -55,7 +55,7 @@ namespace ToDoList.ViewModels
                 Name = "New Task",
                 Description = "",
                 Priority = PriorityLevel.Medium,
-                Deadline = DateTime.Now.AddDays(7),
+                Deadline = DateTime.Now,
                 Status = Model.TaskStatus.ToDo
             };
             var addtaskw = new AddTaskW();

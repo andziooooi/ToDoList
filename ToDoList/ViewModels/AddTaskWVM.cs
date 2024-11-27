@@ -44,6 +44,15 @@ namespace ToDoList.ViewModels
                 OnPropertyChanged(nameof(Priority));
             }
         }
+        public DateTime Deadline
+        {
+            get => _task.Deadline;
+            set
+            {
+                _task.Deadline = value;
+                OnPropertyChanged(nameof(Deadline));
+            }
+        }
 
         public AddTaskWVM(Model.Task task,DataService dataService,Action closeAction)
         {
@@ -56,14 +65,16 @@ namespace ToDoList.ViewModels
 
         private void AcceptTask(object obj)
         {
+            
             var newTask = new Model.Task
             {
                 Name = Name,
                 Description = Description,
                 Priority = Priority,
-                Deadline = DateTime.Now.AddDays(7),
+                Deadline = Deadline,
                 Status = Model.TaskStatus.ToDo
             };
+            Console.WriteLine(Deadline);
             MainViewModel.Tasks.Add(newTask);
             _dataService.AddItem(newTask);
             _dataService.SaveChanges();

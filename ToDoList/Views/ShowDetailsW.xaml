@@ -30,7 +30,7 @@
         <TextBlock Grid.Row="4" Text="Priority" TextAlignment="Center" Margin="5"/>
         <TextBlock Grid.Row="5" Text="{Binding Priority}"/>
         <TextBlock Grid.Row="6" Text="Deadline" TextAlignment="Center" Margin="5"/>
-        <TextBlock Grid.Row="7" Text="{Binding DeadLine, StringFormat=\{0:yyyy-MM-dd\}}"/>
+        <TextBlock Grid.Row="7" Text="{Binding DeadLine,StringFormat=\{0:dd-MM-yyyy\}}"/>
         <TextBlock Grid.Row="8" Text="Description" TextAlignment="Center" Margin="5"/>
         <TextBlock Grid.Row="9" Text="{Binding Description}"/>
     </Grid>

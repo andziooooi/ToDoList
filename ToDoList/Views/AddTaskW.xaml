@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ToDoList"
+        xmlns:local="clr-namespace:ToDoList" xmlns:viewmodels="clr-namespace:ToDoList.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddTaskWVM}"
         mc:Ignorable="d"
         Title="AddTaskW" Height="300" Width="500">
     <Grid>
@@ -27,6 +27,7 @@
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name}" Padding="2" Margin="10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description}" Padding="2" Margin="10"/>
         <ComboBox Name="PriorityCB" Grid.Row="3" Grid.Column="1" Margin="10" ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Text="{Binding Priority}"/>
+        <DatePicker Grid.Row="4" Grid.Column="1" x:Name="datePicker" SelectedDate="{Binding Deadline}" DisplayDate="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="344"/>
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Button Content="Add Task" Command="{Binding AcceptTaskCommand}" Width="100" Padding="1" Margin="0" Height="20"/>
         </StackPanel>
