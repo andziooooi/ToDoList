@@ -62,6 +62,6 @@
         <Border Grid.Row="8" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
             <TextBlock Grid.Row="8" Text="Description" Style="{StaticResource CustomTextBlockTitle}"/>
         </Border>
-        <TextBlock Grid.Row="9" Text="{Binding Description}" Style="{StaticResource CustomTextBlockContent}"/>
+        <TextBox Grid.Row="9" Text="{Binding Description}" FontSize="12" Margin="5" TextAlignment="Left" TextWrapping="Wrap"/>
     </Grid>
 </Window>

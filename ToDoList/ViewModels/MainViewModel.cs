@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Input;
 using ToDoList.Commands;
 using ToDoList.Model;
@@ -76,6 +76,16 @@ namespace ToDoList.ViewModels
         private void SaveTasks(object parameter)
         {
             _dataService.SaveChanges();
+            var childWindow = new NotificationW();
+            childWindow.DataContext = new NotificationWVM("Changes Saved!");
+            var parentWindow = Application.Current.MainWindow;
+            childWindow.Owner = parentWindow;
+            
+            childWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+            childWindow.Left = parentWindow.Left + (parentWindow.Width - childWindow.Width) / 2;
+            childWindow.Top = parentWindow.Top + (parentWindow.Height - childWindow.Height) / 2;
+
+            childWindow.ShowDialog();
         }
         public event PropertyChangedEventHandler? PropertyChanged;
 
