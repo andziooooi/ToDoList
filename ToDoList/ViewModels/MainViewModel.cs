@@ -76,16 +76,15 @@ namespace ToDoList.ViewModels
         private void SaveTasks(object parameter)
         {
             _dataService.SaveChanges();
-            var childWindow = new NotificationW();
-            childWindow.DataContext = new NotificationWVM("Changes Saved!");
+            var childWindow = new NotificationW("Changes Saved!");
             var parentWindow = Application.Current.MainWindow;
             childWindow.Owner = parentWindow;
             
             childWindow.WindowStartupLocation = WindowStartupLocation.Manual;
             childWindow.Left = parentWindow.Left + (parentWindow.Width - childWindow.Width) / 2;
-            childWindow.Top = parentWindow.Top + (parentWindow.Height - childWindow.Height) / 2;
+            childWindow.Top=parentWindow.Top+ parentWindow.Height-100;
 
-            childWindow.ShowDialog();
+            childWindow.Show();
         }
         public event PropertyChangedEventHandler? PropertyChanged;
 

@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="NotificationW" Height="100" Width="200"
         ResizeMode="NoResize" 
-        WindowStyle="SingleBorderWindow">
+        WindowStyle="None"
+        AllowsTransparency="True" Background="Transparent"
+        Style="{DynamicResource {x:Type Window}}">
 
     <Grid>
         <TextBlock Text="{Binding Noti}" TextAlignment="Center" FontSize="24" VerticalAlignment="Center"/>

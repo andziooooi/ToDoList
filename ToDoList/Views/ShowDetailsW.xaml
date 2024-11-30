@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoList"
         mc:Ignorable="d"
-        Title="ShowDetailsW" Height="450" Width="450">
+        Title="Show Details" Height="450" Width="450"
+        Style="{DynamicResource {x:Type Window}}">
     <Window.Resources>
         <Style x:Key="CustomTextBlockTitle" TargetType="TextBlock">
             <Setter Property="FontSize" Value="16" />
@@ -35,33 +36,35 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100*"/>
         </Grid.ColumnDefinitions>
-        <Border Grid.Row="0" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+        <Border Grid.Row="0" BorderBrush="lightblue" BorderThickness="0,0,0,1">
             <TextBlock Text="Task Name" Style="{StaticResource CustomTextBlockTitle}"/>
         </Border>
-        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="0,0,0,2">
+        <Border Grid.Row="1" BorderBrush="teal" BorderThickness="0,0,0,2">
             <TextBlock Text="{Binding Name}" Grid.Row="1" Style="{StaticResource CustomTextBlockContent}"/>
         </Border>
-        <Border Grid.Row="2" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+        <Border Grid.Row="2" BorderBrush="lightblue" BorderThickness="0,0,0,1">
             <TextBlock Grid.Row="2" Text="Status" Style="{StaticResource CustomTextBlockTitle}"/>
         </Border>
-        <Border Grid.Row="3" BorderBrush="Black" BorderThickness="0,0,0,2">
+        <Border Grid.Row="3" BorderBrush="teal" BorderThickness="0,0,0,2">
             <TextBlock Grid.Row="3" Text="{Binding Status}" Style="{StaticResource CustomTextBlockContent}"/>
         </Border>
-        <Border Grid.Row="4" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+        <Border Grid.Row="4" BorderBrush="lightblue" BorderThickness="0,0,0,1">
             <TextBlock Grid.Row="4" Text="Priority" Style="{StaticResource CustomTextBlockTitle}"/>
         </Border>
-        <Border Grid.Row="5" BorderBrush="Black" BorderThickness="0,0,0,2">
+        <Border Grid.Row="5" BorderBrush="teal" BorderThickness="0,0,0,2">
             <TextBlock Grid.Row="5" Text="{Binding Priority}" Style="{StaticResource CustomTextBlockContent}"/>
         </Border>
-        <Border Grid.Row="6" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+        <Border Grid.Row="6" BorderBrush="lightblue" BorderThickness="0,0,0,1">
             <TextBlock Grid.Row="6" Text="Deadline" Style="{StaticResource CustomTextBlockTitle}"/>
         </Border>
-        <Border Grid.Row="7" BorderBrush="Black" BorderThickness="0,0,0,2">
+        <Border Grid.Row="7" BorderBrush="teal" BorderThickness="0,0,0,2">
             <TextBlock Grid.Row="7" Text="{Binding DeadLine,StringFormat=\{0:dd-MM-yyyy\}}" Style="{StaticResource CustomTextBlockContent}"/>
         </Border>
-        <Border Grid.Row="8" BorderBrush="DarkGray" BorderThickness="0,0,0,1">
+        <Border Grid.Row="8" BorderBrush="lightblue" BorderThickness="0,0,0,1">
             <TextBlock Grid.Row="8" Text="Description" Style="{StaticResource CustomTextBlockTitle}"/>
         </Border>
-        <TextBox Grid.Row="9" Text="{Binding Description}" FontSize="12" Margin="5" TextAlignment="Left" TextWrapping="Wrap"/>
+        <ScrollViewer Grid.Row="9" VerticalScrollBarVisibility="Auto">
+            <TextBlock Grid.Row="9" Text="{Binding Description}" FontSize="12" Margin="5" TextAlignment="Left" TextWrapping="Wrap"/>
+        </ScrollViewer>
     </Grid>
 </Window>

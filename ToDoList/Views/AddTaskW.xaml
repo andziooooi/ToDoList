@@ -5,7 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ToDoList" xmlns:viewmodels="clr-namespace:ToDoList.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:AddTaskWVM}"
         mc:Ignorable="d"
-        Title="AddTaskW" Height="300" Width="500">
+        Title="Add Task" Height="300" Width="500"
+        Style="{DynamicResource {x:Type Window}}">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="BorderBrush" Value="teal"/>
+        </Style>
+        <Style x:Key="CenteredTextStylecb" TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -26,8 +37,9 @@
         <TextBlock Grid.Row="4" Text="Deadline" TextAlignment="Center" VerticalAlignment="Center" Height="16"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name}" Padding="2" Margin="10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description}" Padding="2" Margin="10"/>
-        <ComboBox Name="PriorityCB" Grid.Row="3" Grid.Column="1" Margin="10" ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Text="{Binding Priority}"/>
-        <DatePicker Grid.Row="4" Grid.Column="1" x:Name="datePicker" SelectedDate="{Binding Deadline}" DisplayDate="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10"/>
+        <Border Grid.Row="3" Grid.Column="1" Margin="9" BorderBrush="teal" BorderThickness="1"/>
+        <ComboBox Name="PriorityCB" Grid.Row="3" Grid.Column="1" Margin="10" ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Text="{Binding Priority}" BorderThickness="0" Background="White"/>
+        <DatePicker Grid.Row="4" Grid.Column="1" x:Name="datePicker" SelectedDate="{Binding Deadline}" DisplayDate="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}, Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="10" BorderBrush="Teal"/>
         <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="5">
             <Button Content="Add Task" Command="{Binding AcceptTaskCommand}" Width="100" Padding="1" Margin="0" Height="20"/>
         </StackPanel>

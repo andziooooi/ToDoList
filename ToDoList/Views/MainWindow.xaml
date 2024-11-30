@@ -6,47 +6,82 @@
         xmlns:local="clr-namespace:ToDoList" 
         xmlns:viewmodels="clr-namespace:ToDoList.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ToDo List" Height="450" Width="800"
+        Style="{DynamicResource {x:Type Window}}">
+    <Window.Resources>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="CenteredTextStyle" TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="CenteredTextStylecb" TargetType="ComboBox">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" Margin="10">
             <Button Content="Add Task" Command="{Binding AddTaskCommand}" Width="100" Margin="5"/>
             <Button Content="Delete Task" Command="{Binding DeleteTaskCommand}" Width="100" Margin="5"/>
         </StackPanel>
-        <DataGrid Grid.Row="1" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask}" CanUserAddRows="False"  AutoGenerateColumns="False" Margin="10">
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Tasks}" SelectedItem="{Binding SelectedTask}" CanUserAddRows="False"  AutoGenerateColumns="False" Margin="10" GridLinesVisibility="All" 
+          HorizontalGridLinesBrush="LightBlue" 
+          VerticalGridLinesBrush="LightBlue"
+          BorderBrush="Teal" 
+          BorderThickness="2">
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="Padding" Value="5"/>
+                    <Setter Property="BorderThickness" Value="1" />
+                    <Setter Property="VerticalContentAlignment" Value="Center"/>
                 </Style>
             </DataGrid.CellStyle>
             <DataGrid.Columns>
-                <DataGridTemplateColumn Header="Name" Width="*" SortMemberPath="Name">
+                <DataGridTemplateColumn Header="Name" SortMemberPath="Name" Width="2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="2*"/>
-                <DataGridComboBoxColumn Header="Priority" SelectedItemBinding="{Binding Priority}" ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Width="100" />
-                <DataGridTemplateColumn Header="Deadline" SortMemberPath="Deadline">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}}" Width="150" TextAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                     <DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Deadline,StringFormat=\{0:dd-MM-yyyy\}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150" />
+                            <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellEditingTemplate>
                 </DataGridTemplateColumn>
-                <!--<DataGridTextColumn Header="Deadline" Binding="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}}" Width="150"/> -->
-                <DataGridComboBoxColumn Header="Status" SelectedItemBinding="{Binding Status}" ItemsSource="{Binding Source={StaticResource TaskStatuses}}" Width="100"/>
+                <DataGridTemplateColumn Header="Description" SortMemberPath="Description" Width="2*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Description}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridComboBoxColumn Header="Priority" SelectedItemBinding="{Binding Priority}" ItemsSource="{Binding Source={StaticResource PriorityLevels}}" Width="100" ElementStyle="{StaticResource CenteredTextStylecb}"/>
+                <DataGridTemplateColumn Header="Deadline" SortMemberPath="Deadline">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Deadline, StringFormat=\{0:dd-MM-yyyy\}}" Width="150" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Deadline,StringFormat=\{0:dd-MM-yyyy\}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>
+                </DataGridTemplateColumn>
+                <DataGridComboBoxColumn Header="Status" SelectedItemBinding="{Binding Status}" ItemsSource="{Binding Source={StaticResource TaskStatuses}}" Width="100" ElementStyle="{StaticResource CenteredTextStylecb}"/>
                 <DataGridTemplateColumn Header="Details">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -60,10 +95,11 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
-            <Button Content="Save Changes" Command="{Binding SaveTasksCommand}" Width="90" Margin="5"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <TextBlock Text="Double click to edit!" FontWeight="Bold"/>
         </StackPanel>
-
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
+            <Button Content="Save Changes" Command="{Binding SaveTasksCommand}" Width="143" Margin="5"/>
+        </StackPanel>
     </Grid>
-    
 </Window>
