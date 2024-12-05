@@ -33,7 +33,7 @@
         <TextBlock Grid.Column="0" Grid.ColumnSpan="2" Text="Add new task" TextAlignment="Center" VerticalAlignment="Center" FontSize="20" Height="27"/>
         <TextBlock Grid.Row="1" Text="Task Name" TextAlignment="Center" VerticalAlignment="Center" Height="16"/>
         <TextBlock Grid.Row="2" Text="Description" TextAlignment="Center" VerticalAlignment="Center" Height="16"/>
-        <TextBlock Grid.Row="3" Text="priority" TextAlignment="Center" VerticalAlignment="Center" Height="16"/>
+        <TextBlock Grid.Row="3" Text="Priority" TextAlignment="Center" VerticalAlignment="Center" Height="16"/>
         <TextBlock Grid.Row="4" Text="Deadline" TextAlignment="Center" VerticalAlignment="Center" Height="16"/>
         <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Name}" Padding="2" Margin="10"/>
         <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Description}" Padding="2" Margin="10"/>
